@@ -14,14 +14,14 @@ public class Reader {
     }
 
     //sets dirListing to the list of files in given filepath
-    public void setDir(File directoryPath) {
-        this.dir = new File(directoryPath.getPath());
+    public void setDir(String directoryPath) {
+        this.dir = new File(directoryPath);
         this.dirListing = dir.listFiles();
     }
 
     //returns a linked list with array nodes that contain the values
     // from the files in the directory
-    public LinkedList<int[]> getArrayList() {
+    private LinkedList<int[]> getArrayList() {
         if (dirListing != null) {
             for (File child : dirListing) {
                 //adds a int[] node to arrayList
