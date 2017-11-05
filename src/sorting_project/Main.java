@@ -9,7 +9,8 @@ public class Main {
         Sorter sorter = new Sorter();
         reader.createArrayList();
 
-       array = sorter.mergeSort(reader.getArray(0));
+       array = sorter.quickSort(reader.getArray(0));
+
        int t =5;
 
     }
