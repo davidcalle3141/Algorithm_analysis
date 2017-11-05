@@ -1,35 +1,36 @@
 package sorting_project;
 
+
+
 import java.io.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class Reader {
     private File dir;
     private File[] dirListing;
-    private LinkedList<int[]> arrayList;
+    private ArrayList < int[] > arrayList;
+
 
     //constructor initiates arrayList linked list
-    Reader() {
-        arrayList = new LinkedList<>();
-    }
-
-    //sets dirListing to the list of files in given filepath
-    public void setDir(String directoryPath) {
+    Reader(String directoryPath) {
         this.dir = new File(directoryPath);
         this.dirListing = dir.listFiles();
+        this.arrayList = new ArrayList < > ();
+
+
     }
+
 
     //returns a linked list with array nodes that contain the values
     // from the files in the directory
-    private LinkedList<int[]> getArrayList() {
+    public void createArrayList() {
         if (dirListing != null) {
-            for (File child : dirListing) {
+            sortDir(dirListing);
+            for (File child: dirListing) {
                 //adds a int[] node to arrayList
-
                 arrayList.add(fileToArray(child));
             }
         }
-        return arrayList;
     }
 
     /*private int[] fixArraySize(int[] txtArray) {
@@ -37,7 +38,7 @@ public class Reader {
 
     private int[] fileToArray(File child) {
         String fileName = child.getName();
-        //assuming the filenames are always formatted the same we can get the max size of the array
+        //assuming the filenames are always formatted the same we can get the max            //size of the array
         //for each file from its name
         int length = Integer.parseInt(fileName.substring(3, fileName.length() - 4));
         int[] txtArray = new int[length];
@@ -48,7 +49,8 @@ public class Reader {
             BufferedReader br = new BufferedReader(fReader);
             String line;
             while ((line = br.readLine()) != null) {
-                txtArray[0] = Integer.parseInt(line);
+                if (line.equals("")) continue;
+                txtArray[pos] = Integer.parseInt(line);
                 pos++;
             }
         } catch (IOException e) {
@@ -59,5 +61,31 @@ public class Reader {
         return txtArray;
     }
 
+    public int[] getArray(int i) {
 
+        return arrayList.get(i);
+    }
+
+    public int getNumOfArrays() {
+        return arrayList.size();
+    }
+    //sorts directories by length helps keep things organized
+    private void sortDir(File[] dirArray) {
+        int i;
+        File key;
+        int j;
+        for (j = 1; j < dirArray.length; j++) {
+            key = dirArray[j];
+            i = j - 1;
+            while (i >= 0 && dirArray[i].length() > key.length()) {
+
+                dirArray[i + 1] = dirArray[i];
+                i = i - 1;
+            }
+            dirArray[i + 1] = key;
+        }
+
+
+
+    }
 }
