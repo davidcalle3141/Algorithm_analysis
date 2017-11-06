@@ -13,25 +13,26 @@ public class Writer {
 
 
     }
-    public void createFileForArray(int[]A, String sortType) throws IOException {
+    public void createFileForArray(int[]A, String sortType, int count) throws IOException {
         outFile = new File(dir +"/"+sortType+"Num"+A.length+".txt");
         if(!outFile.createNewFile()){
 
-            System.out.println("file overwritten");}
-        writeToFile(A, outFile);
+            System.out.println("file already exists please delete old Version");}
+        writeToFile(A, outFile, count);
     }
 
-    private void writeToFile(int[]A, File writeTo){
+    private void writeToFile(int[]A, File writeTo, int count){
         FileWriter fwriter = null;
         BufferedWriter writer = null;
 
         try{
-            fwriter = new FileWriter(writeTo, false);
+            fwriter = new FileWriter(writeTo, true);
             writer = new BufferedWriter(fwriter);
-
+            writer.write("Count is equal to : "+ count);
+            writer.newLine();
             for (int child: A) {
-                writer.write(Integer.toString(A[child-1]));
-                writer.newLine();
+                writer.write(Integer.toString(A[child-1])+ " ");
+
 
             }
             writer.close();
