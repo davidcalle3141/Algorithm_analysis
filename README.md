@@ -1,4 +1,4 @@
-##Algorithm Analysis sorting algorithm project
+Algorithm Analysis sorting algorithm project
 
 Introduction:
  Sorting routines are among the most widely used and studied algorithms. Every
